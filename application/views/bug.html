@@ -1,0 +1,89 @@
+<div data-ng-hide="data.error || data.loading" class="text-center center-block">
+    <h4>Summary</h4>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th style="min-width: 250px;">Exception</th>
+            <td>
+                <span class="label label-default" data-ng-show="data.data.issues[0].exception == 'null'">Manual Report</span>
+                <code style="width:100%;text-align:left;" data-ng-show="data.data.issues[0].exception != 'null'">{{data.data.issues[0].exception}}</code>
+            </td>
+        </tr>
+        <tr>
+            <th>User Description</th>
+            <td>{{data.data.issues[0].userDescription}}</td>
+        </tr>
+        <tr>
+            <th>Program Description</th>
+            <td>
+                <span class="label label-default" data-ng-show="data.data.issues[0].progDescription == '![MANUAL]'">Manual Report</span>
+                <span class="label label-danger" data-ng-show="data.data.issues[0].progDescription == '![UNHANDLED]'">Unhandled Exception</span>
+                <span data-ng-hide="data.data.issues[0].progDescription == '![MANUAL]' || data.data.issues[0].progDescription == '![UNHANDLED]'">{{data.data.issues[0].progDescription}}</span>
+            </td>
+        </tr>
+        <tr>
+            <th>Undo Possible</th>
+            <td data-ng-class="{success:isTrue('histUndoPossible'),danger:!isTrue('histUndoPossible')}">{{data.data.issues[0].histUndoPossible}}</td>
+        </tr>
+        <tr>
+            <th>Redo Possible</th>
+            <td data-ng-class="{success:isTrue('histRedoPossible'),danger:!isTrue('histRedoPossible')}">{{data.data.issues[0].histRedoPossible}}</td>
+        </tr>
+        <tr>
+            <th>Navigate Forward Possible</th>
+            <td data-ng-class="{success:isTrue('navForwardPossible'),danger:!isTrue('navForwardPossible')}">{{data.data.issues[0].navForwardPossible}}</td>
+        </tr>
+        <tr>
+            <th>Navigate Backward Possible</th>
+            <td data-ng-class="{success:isTrue('navBackwardPossible'),danger:!isTrue('navBackwardPossible')}">{{data.data.issues[0].navBackwardPossible}}</td>
+        </tr>
+        <tr>
+            <th>Misc Information</th>
+            <td>{{data.data.issues[0].misc}}</td>
+        </tr>
+        <tr>
+            <th>Associated Issues</th>
+            <td>
+                <span data-ng-repeat="issue in issueLinks">
+                    <a data-ng-href="/#/issue/{{issue}}">{{issue}}</a>{{$last ? '' : ', '}}
+                </span>
+            </td>
+        </tr>
+    </table>
+
+    <h4>Screenshots</h4>
+    <div class="center-block row" ng-repeat="image in images">
+        <img ng-src="{{image.thumbUrl}}" class="img-responsive thumbnail img-thumbnail col-md-2" style="margin: 0 auto; max-height: 150px; position: relative">
+    </div>
+
+    <table style="display: inline-block" class="table-responsive">
+        <tr>
+            <td>
+                <h4>OS</h4>
+                <!-- OS Occurrences -->
+                <canvas height="150" class="chart chart-pie" data-data="osNumbers" data-labels="osNames" data-legend="true"></canvas>
+            </td>
+            <td>
+                <h4>JDK</h4>
+                <!-- Java Version -->
+                <canvas height="150" class="chart chart-pie" data-data="jdkNumbers" data-labels="jdkLabels" data-legend="true"></canvas>
+            </td>
+            <td>
+                <h4>Args</h4>
+                <!-- Startup Arguments -->
+                <canvas height="150" class="chart chart-pie" data-data="argsNumbers" data-labels="argsLabels" data-legend="true"></canvas>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Daily Occurrences -->
+    <h4 class="text-center">Daily Bug Occurrences</h4>
+    <canvas height="50" class="chart chart-bar" data-data="occurrenceNumbers" data-labels="occurrenceLabels"></canvas>
+
+</div>
+<div data-ng-show="data.error" class="text-center">
+    <div class="alert alert-danger">
+        <h4>Loading Failed</h4>
+        <p>{{data.message}}</p>
+    </div>
+</div>
+<div data-ng-include data-src="'application/views/loading.html'"></div>

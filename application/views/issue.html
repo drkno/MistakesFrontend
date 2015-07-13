@@ -1,0 +1,72 @@
+<div data-ng-hide="data.error || data.loading" class="text-center center-block">
+    <h4>Summary</h4>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Date/Time</th>
+            <td>{{issueDateTime}}</td>
+        </tr>
+        <tr>
+            <th>Exception</th>
+            <td>
+                <span class="label label-default" data-ng-hide="data.data.exception == null">Manual Report</span>
+                <code data-ng-show="data.data.exception == null">{{data.data.exception}}</code>
+            </td>
+        </tr>
+        <tr>
+            <th>User Description</th>
+            <td>{{data.data.userDescription}}</td>
+        </tr>
+        <tr>
+            <th>Program Description</th>
+            <td>
+                <span class="label label-default" data-ng-show="data.data.progDescription == '![MANUAL]'">Manual Report</span>
+                <span class="label label-danger" data-ng-show="data.data.progDescription == '![UNHANDLED]'">Unhandled Exception</span>
+                <span data-ng-hide="data.data.progDescription == '![MANUAL]' || data.data.progDescription == '![UNHANDLED]'">{{data.data.progDescription}}</span>
+            </td>
+        </tr>
+        <tr>
+            <th>Undo Possible</th>
+            <td data-ng-class="{success:isTrue('histUndoPossible'),danger:!isTrue('histUndoPossible')}">{{data.data.histUndoPossible}}</td>
+        </tr>
+        <tr>
+            <th>Redo Possible</th>
+            <td data-ng-class="{success:isTrue('histRedoPossible'),danger:!isTrue('histRedoPossible')}">{{data.data.histRedoPossible}}</td>
+        </tr>
+        <tr>
+            <th>Navigate Forward Possible</th>
+            <td data-ng-class="{success:isTrue('navForwardPossible'),danger:!isTrue('navForwardPossible')}">{{data.data.navForwardPossible}}</td>
+        </tr>
+        <tr>
+            <th>Navigate Backward Possible</th>
+            <td data-ng-class="{success:isTrue('navBackwardPossible'),danger:!isTrue('navBackwardPossible')}">{{data.data.navBackwardPossible}}</td>
+        </tr>
+        <tr>
+            <th>Operating System</th>
+            <td>{{data.data.osName}} ({{data.data.osVersion}})</td>
+        </tr>
+        <tr>
+            <th>Java Version</th>
+            <td>{{data.data.javaVersion}}</td>
+        </tr>
+        <tr>
+            <th>Program Arguments</th>
+            <td>{{data.data.args}}</td>
+        </tr>
+        <tr>
+            <th>Misc Information</th>
+            <td>{{data.data.misc}}</td>
+        </tr>
+    </table>
+
+    <h4>Screenshots</h4>
+    <div class="center-block row" ng-repeat="image in images">
+        <img ng-src="{{image.thumbUrl}}" class="img-responsive thumbnail img-thumbnail col-md-2" style="margin: 0 auto; max-height: 150px; position: relative">
+    </div>
+</div>
+<div data-ng-show="data.error" class="text-center">
+    <div class="alert alert-danger">
+        <h4>Loading Failed</h4>
+        <p>{{data.message}}</p>
+    </div>
+</div>
+<div data-ng-include data-src="'application/views/loading.html'"></div>

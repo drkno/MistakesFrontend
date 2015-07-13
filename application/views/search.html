@@ -1,0 +1,119 @@
+<style>
+    .filterTd {
+        min-width: 1px;
+        white-space: nowrap;
+        text-align: right;
+    }
+</style>
+
+<div class="center-block text-center">
+    <div style="width: 100%; display: table">
+        <label for="filterText" style="display: table-cell; width: 1px; white-space: nowrap;">Filter: {{filterCount}}&nbsp;&nbsp;</label>
+        <div style="display: table-cell; width: 100%">
+            <input data-ng-model="filterText" type="text" id="filterText" name="filterText" style="text-align: center; width: 100%;" placeholder="Search or Filter">
+            <br>
+            <table style="width: 80%">
+                <tr>
+                    <td class="filterTd">
+                        <label for="typeSelect">Show</label>
+                        <select data-ng-model="typeSelect" name="typeSelect" id="typeSelect">
+                            <option value=0>Bugs and Issues</option>
+                            <option value=1>Bugs Only</option>
+                            <option value=2>Issues Only</option>
+                        </select>
+                    </td>
+                    <td class="filterTd">
+                        <label for="reportType">Report Type</label>
+                        <select data-ng-model="reportType" name="reportType" id="reportType">
+                            <option value=0>Any</option>
+                            <option value=1>Manual</option>
+                            <option value=2>Unhandled</option>
+                            <option value=3>Exception</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="filterTd">
+                        <label for="undoPossible">Undo Possible</label>
+                        <select data-ng-model="undoPossible" name="undoPossible" id="undoPossible">
+                            <option value=0>Any</option>
+                            <option value=1>Possible</option>
+                            <option value=2>Not Possible</option>
+                        </select>
+                    </td>
+                    <td class="filterTd">
+                        <label for="redoPossible">Redo Possible</label>
+                        <select data-ng-model="redoPossible" name="redoPossible" id="redoPossible">
+                            <option value=0>Any</option>
+                            <option value=1>Possible</option>
+                            <option value=2>Not Possible</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="filterTd">
+                        <label for="navForwardPossible">Navigate Forward Possible</label>
+                        <select data-ng-model="navForwardPossible" name="navForwardPossible" id="navForwardPossible">
+                            <option value=0>Any</option>
+                            <option value=1>Possible</option>
+                            <option value=2>Not Possible</option>
+                        </select>
+                    </td>
+                    <td class="filterTd">
+                        <label for="navBackwardPossible">Navigate Backward Possible</label>
+                        <select data-ng-model="navBackwardPossible" name="navBackwardPossible" id="navBackwardPossible">
+                            <option value=0>Any</option>
+                            <option value=1>Possible</option>
+                            <option value=2>Not Possible</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="filterTd">
+                        <label for="startDate">Start Date</label>
+                        <input type="date" value="" name="startDate" id="startDate" data-ng-model="startDate">
+                    </td>
+                    <td class="filterTd">
+                        <label for="endDate">End Date</label>
+                        <input type="date" value="" name="endDate" id="endDate" data-ng-model="endDate">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<table style="width: 100%" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Summary</th>
+            <th>Date/Time</th>
+            <th>Other</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr data-ng-repeat="item in getItems()" data-ng-class="{warning: item.isToday}">
+            <td>
+                <span class="label label-danger" style="display: inline-block" data-ng-show="item.type == 2">Issue</span>
+                <span class="label label-warning" style="display: inline-block" data-ng-show="item.type == 1">Bug</span>
+                &nbsp;
+                <a href="{{item.link}}">{{item.id}}</a>
+            </td>
+            <td>{{item.summary}}</td>
+            <td>{{item.date}}</td>
+            <td>
+                <div data-ng-repeat="tag in item.tags" style="display: inline-block">
+                    <span class="label label-primary" style="display: inline-block" data-ng-show="tag == 'manual'">Manual</span>
+                    <span class="label label-primary" style="display: inline-block" data-ng-show="tag == 'unhandled'">Unhandled</span>
+                    <span class="label label-primary" style="display: inline-block" data-ng-show="tag == 'exception'">Exception</span>
+                    <span class="label label-info" style="display: inline-block" data-ng-show="tag == 'undo'">Can Undo</span>
+                    <span class="label label-info" style="display: inline-block" data-ng-show="tag == 'redo'">Can Redo</span>
+                    <span class="label label-success" style="display: inline-block" data-ng-show="tag == 'navfor'">Can Navigate Forward</span>
+                    <span class="label label-success" style="display: inline-block" data-ng-show="tag == 'navback'">Can Navigate Backward</span>
+                    &nbsp;
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
