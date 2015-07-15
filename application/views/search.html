@@ -113,6 +113,7 @@
     <thead>
         <tr>
             <th>Item</th>
+            <th></th>
             <th>Summary</th>
             <th>Date/Time</th>
             <th>Other</th>
@@ -123,7 +124,8 @@
             <td>
                 <span class="label label-danger" style="display: inline-block" data-ng-show="item.type == 2">Issue</span>
                 <span class="label label-warning" style="display: inline-block" data-ng-show="item.type == 1">Bug</span>
-                &nbsp;
+            </td>
+            <td>
                 <a href="{{item.link}}">{{item.id}}</a>
             </td>
             <td>{{item.summary}}</td>

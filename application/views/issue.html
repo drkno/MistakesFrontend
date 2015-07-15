@@ -1,3 +1,29 @@
+<style>
+    .screenshotThumbnail {
+        margin: 0 auto;
+        max-height: 150px;
+        position: relative;
+    }
+    .screenshotLightbox {
+        transform: translate(-50%, -50%);
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        max-height: 100%;
+        z-index: 999999;
+    }
+    .screenshotOverlay {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        opacity: 0.8;
+        z-index: 999998;
+    }
+</style>
+
 <div data-ng-hide="data.error || data.loading" class="text-center center-block">
     <h4>Summary</h4>
     <table class="table table-bordered table-striped">
@@ -59,8 +85,9 @@
     </table>
 
     <h4>Screenshots</h4>
-    <div class="center-block row" ng-repeat="image in images">
-        <img ng-src="{{image.thumbUrl}}" class="img-responsive thumbnail img-thumbnail col-md-2" style="margin: 0 auto; max-height: 150px; position: relative">
+    <div class="center-block row" style="display: inline-block" ng-repeat="image in images">
+        <img data-ng-src="{{image.thumbUrl}}" class="img-responsive img-thumbnail" data-ng-class="{screenshotThumbnail:!image.lightBox, screenshotLightbox:image.lightBox}" data-ng-click="toggleLightbox(image)">
+        <div class="screenshotOverlay" data-ng-show="image.lightBox" data-ng-click="toggleLightbox(image)"></div>
     </div>
 </div>
 <div data-ng-show="data.error" class="text-center">

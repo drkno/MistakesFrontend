@@ -3,7 +3,9 @@
 
     var module = angular.module('errorReporter', [
         'ngRoute',
-        'errorReporterControllers'
+        'ui.bootstrap',
+        'bootstrapLightbox',
+        'chart.js'
     ]);
 
     module.config(['$routeProvider', function($routeProvider) {

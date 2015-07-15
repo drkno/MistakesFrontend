@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var module = angular.module('errorReporterControllers');
+    var module = angular.module('errorReporter');
 
     module.controller('BugController', ['$scope', '$http', '$routeParams', '$location',
         function ($scope, $http, $routeParams, $location) {
@@ -17,6 +17,10 @@
             $scope.argsLabels = [];
             $scope.argsNumbers = [];
             $scope.issueLinks = [];
+
+            $scope.toggleLightbox = function(image) {
+                image.lightBox = !image.lightBox;
+            };
 
             $scope.setup = function() {
                 for (var i = 0; i <= 30; i++) {
@@ -66,7 +70,8 @@
 
                     $scope.images.push({
                         url: item.screenshot,
-                        thumbUrl: item.screenshot
+                        thumbUrl: item.screenshot,
+                        lightBox: false
                     });
 
                     $scope.issueLinks.push(item._id);

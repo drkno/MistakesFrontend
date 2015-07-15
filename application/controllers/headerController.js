@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var module = angular.module('errorReporterControllers');
+    var module = angular.module('errorReporter');
 
     module.controller('HeaderController', ['$scope', '$location',
         function ($scope, $location) {

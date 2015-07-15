@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var module = angular.module('errorReporterControllers');
+    var module = angular.module('errorReporter');
 
     module.controller('SearchController', ['$scope', '$http', '$routeParams', '$location',
         function ($scope, $http, $routeParams, $location) {
@@ -51,7 +51,7 @@
                     }
                     else {
                         report = 3;
-                        summary += item.progDescription.split('\n')[0].substr(70) + "...";//\n";
+                        summary += item.progDescription.split('\n')[0].substr(70);// + "...";//\n";
                         //summary += item.exception.split('\n')[0].substr(300) + "...";
                     }
 
@@ -108,13 +108,15 @@
                         }
                         else if (item.progDescription === "![UNHANDLED]") {
                             report = 2;
-                            summary = summary.slice(0,-1); // remove me when below line is uncommented
-                            //summary += summary = item.exception.split('\n')[0].substr(300) + "...";
+                            summary = summary.slice(0,-1);
                         }
                         else {
                             report = 3;
-                            summary += item.progDescription.split('\n')[0].substr(70) + "...";//\n";
-                            //summary += item.exception.split('\n')[0].substr(300) + "...";
+                            var temp = item.progDescription.split('\n')[0].substr(70);
+                            if (temp.length < item.progDescription) {
+                                temp += "...";
+                            }
+                            summary += temp;
                         }
 
                         $scope.data.push({
