@@ -4,6 +4,16 @@
         white-space: nowrap;
         text-align: right;
     }
+    .filterTd input {
+        width: 100%;
+        max-width: 150px;
+        text-align: center;
+    }
+    .filterTd select {
+        max-width: 150px;
+        width: 100%;
+        text-align: center;
+    }
 </style>
 
 <div class="center-block text-center">
@@ -16,6 +26,8 @@
                 <tr>
                     <td class="filterTd">
                         <label for="typeSelect">Show</label>
+                    </td>
+                    <td class="filterTd">
                         <select data-ng-model="typeSelect" name="typeSelect" id="typeSelect">
                             <option value=0>Bugs and Issues</option>
                             <option value=1>Bugs Only</option>
@@ -24,6 +36,8 @@
                     </td>
                     <td class="filterTd">
                         <label for="reportType">Report Type</label>
+                    </td>
+                    <td class="filterTd">
                         <select data-ng-model="reportType" name="reportType" id="reportType">
                             <option value=0>Any</option>
                             <option value=1>Manual</option>
@@ -35,6 +49,8 @@
                 <tr>
                     <td class="filterTd">
                         <label for="undoPossible">Undo Possible</label>
+                    </td>
+                    <td class="filterTd">
                         <select data-ng-model="undoPossible" name="undoPossible" id="undoPossible">
                             <option value=0>Any</option>
                             <option value=1>Possible</option>
@@ -43,6 +59,8 @@
                     </td>
                     <td class="filterTd">
                         <label for="redoPossible">Redo Possible</label>
+                    </td>
+                    <td class="filterTd">
                         <select data-ng-model="redoPossible" name="redoPossible" id="redoPossible">
                             <option value=0>Any</option>
                             <option value=1>Possible</option>
@@ -53,6 +71,8 @@
                 <tr>
                     <td class="filterTd">
                         <label for="navForwardPossible">Navigate Forward Possible</label>
+                    </td>
+                    <td class="filterTd">
                         <select data-ng-model="navForwardPossible" name="navForwardPossible" id="navForwardPossible">
                             <option value=0>Any</option>
                             <option value=1>Possible</option>
@@ -61,6 +81,8 @@
                     </td>
                     <td class="filterTd">
                         <label for="navBackwardPossible">Navigate Backward Possible</label>
+                    </td>
+                    <td class="filterTd">
                         <select data-ng-model="navBackwardPossible" name="navBackwardPossible" id="navBackwardPossible">
                             <option value=0>Any</option>
                             <option value=1>Possible</option>
@@ -71,10 +93,14 @@
                 <tr>
                     <td class="filterTd">
                         <label for="startDate">Start Date</label>
+                    </td>
+                    <td class="filterTd">
                         <input type="date" value="" name="startDate" id="startDate" data-ng-model="startDate">
                     </td>
                     <td class="filterTd">
                         <label for="endDate">End Date</label>
+                    </td>
+                    <td class="filterTd">
                         <input type="date" value="" name="endDate" id="endDate" data-ng-model="endDate">
                     </td>
                 </tr>
@@ -103,16 +129,13 @@
             <td>{{item.summary}}</td>
             <td>{{item.date}}</td>
             <td>
-                <div data-ng-repeat="tag in item.tags" style="display: inline-block">
-                    <span class="label label-primary" style="display: inline-block" data-ng-show="tag == 'manual'">Manual</span>
-                    <span class="label label-primary" style="display: inline-block" data-ng-show="tag == 'unhandled'">Unhandled</span>
-                    <span class="label label-primary" style="display: inline-block" data-ng-show="tag == 'exception'">Exception</span>
-                    <span class="label label-info" style="display: inline-block" data-ng-show="tag == 'undo'">Can Undo</span>
-                    <span class="label label-info" style="display: inline-block" data-ng-show="tag == 'redo'">Can Redo</span>
-                    <span class="label label-success" style="display: inline-block" data-ng-show="tag == 'navfor'">Can Navigate Forward</span>
-                    <span class="label label-success" style="display: inline-block" data-ng-show="tag == 'navback'">Can Navigate Backward</span>
-                    &nbsp;
-                </div>
+                <span class="label label-primary" style="display: inline-block" data-ng-show="item.report == 1">Manual&nbsp;</span>
+                <span class="label label-primary" style="display: inline-block" data-ng-show="item.report == 2">Unhandled&nbsp;</span>
+                <span class="label label-primary" style="display: inline-block" data-ng-show="item.report == 3">Exception&nbsp;</span>
+                <span class="label label-info" style="display: inline-block" data-ng-show="item.undo == 1">Can Undo&nbsp;</span>
+                <span class="label label-info" style="display: inline-block" data-ng-show="item.redo == 1">Can Redo&nbsp;</span>
+                <span class="label label-success" style="display: inline-block" data-ng-show="item.navFor == 1">Can Navigate Forward&nbsp;</span>
+                <span class="label label-success" style="display: inline-block" data-ng-show="item.navBack == 1">Can Navigate Backward&nbsp;</span>
             </td>
         </tr>
     </tbody>

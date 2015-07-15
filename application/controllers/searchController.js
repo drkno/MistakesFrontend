@@ -23,12 +23,11 @@
                         d = new Date(item.dateTime),
                         date = ("0" + d.getDate()).slice(-2) + "/" + ("0" + (d.getMonth() + 1)).slice(-2) + "/" + d.getFullYear(),
                         time = d.getHours() + ":" + d.getMinutes(),
-                        tags = [],
                         summary = "",
-                        undo = 2,
-                        redo = 2,
-                        navFor = 2,
-                        navBack = 2,
+                        undo = item.histUndoPossible ? 1 : 2,
+                        redo = item.histRedoPossible ? 1 : 2,
+                        navFor = item.navForwardPossible ? 1 : 2,
+                        navBack = item.navBackwardPossible ? 1 : 2,
                         report = -1;
 
                     item.userDescription = decodeURIComponent(item.userDescription.replace(/\+/g,  " "));
@@ -42,18 +41,15 @@
                     }
 
                     if (item.progDescription === "![MANUAL]") {
-                        tags.push("manual");
                         report = 1;
                         summary = summary.slice(0,-1);
                     }
                     else if (item.progDescription === "![UNHANDLED]") {
-                        tags.push("unhandled");
                         report = 2;
                         summary = summary.slice(0,-1); // remove me when below line is uncommented
                         //summary += summary = item.exception.split('\n')[0].substr(300) + "...";
                     }
                     else {
-                        tags.push("exception");
                         report = 3;
                         summary += item.progDescription.split('\n')[0].substr(70) + "...";//\n";
                         //summary += item.exception.split('\n')[0].substr(300) + "...";
@@ -72,8 +68,7 @@
                         id: item._id,
                         link: "/#/issue/" + item._id,
                         summary: summary,
-                        date: date + " " + time,
-                        tags: tags
+                        date: date + " " + time
                     });
                 }
             };
@@ -90,12 +85,11 @@
                             d = new Date(item.dateTime),
                             date = ("0" + d.getDate()).slice(-2) + "/" + ("0" + (d.getMonth() + 1)).slice(-2) + "/" + d.getFullYear(),
                             time = d.getHours() + ":" + d.getMinutes(),
-                            tags = [],
                             summary = "",
-                            undo = 2,
-                            redo = 2,
-                            navFor = 2,
-                            navBack = 2,
+                            undo = item.histUndoPossible ? 1 : 2,
+                            redo = item.histRedoPossible ? 1 : 2,
+                            navFor = item.navForwardPossible ? 1 : 2,
+                            navBack = item.navBackwardPossible ? 1 : 2,
                             report = -1;
 
                         item.userDescription = decodeURIComponent(item.userDescription.replace(/\+/g,  " "));
@@ -109,18 +103,15 @@
                         }
 
                         if (item.progDescription === "![MANUAL]") {
-                            tags.push("manual");
                             report = 1;
                             summary = summary.slice(0,-1);
                         }
                         else if (item.progDescription === "![UNHANDLED]") {
-                            tags.push("unhandled");
                             report = 2;
                             summary = summary.slice(0,-1); // remove me when below line is uncommented
                             //summary += summary = item.exception.split('\n')[0].substr(300) + "...";
                         }
                         else {
-                            tags.push("exception");
                             report = 3;
                             summary += item.progDescription.split('\n')[0].substr(70) + "...";//\n";
                             //summary += item.exception.split('\n')[0].substr(300) + "...";
@@ -139,8 +130,7 @@
                             id: data.data[i]._id,
                             link: "/#/bug/" + data.data[i]._id,
                             summary: summary,
-                            date: date + " " + time,
-                            tags: tags
+                            date: date + " " + time
                         });
                     }
                 });
@@ -184,7 +174,8 @@
                 for (var i = 0; i < $scope.data.length; i++) {
                     var item = $scope.data[i];
 
-                    if (textFilter && !item.searchText.trim().toLowerCase().contains($scope.filterText)) {
+                    // indexOf cause IE and Chrome don't like contains() and IE doesn't like includes()
+                    if (textFilter && item.searchText.trim().toLowerCase().indexOf($scope.filterText) < 0) {
                         continue;
                     }
 
