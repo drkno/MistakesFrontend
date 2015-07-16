@@ -11,15 +11,15 @@
     module.config(['$routeProvider', function($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'application/views/search.html',
+                templateUrl: '/views/search.html',
                 controller: 'SearchController'
             })
             .when('/bug/:bugId', {
-                templateUrl: 'application/views/bug.html',
+                templateUrl: '/views/bug.html',
                 controller: 'BugController'
             })
             .when('/issue/:issueId', {
-                templateUrl: 'application/views/issue.html',
+                templateUrl: '/views/issue.html',
                 controller: 'IssueController'
             })
             .otherwise({

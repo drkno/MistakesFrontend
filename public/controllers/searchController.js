@@ -66,7 +66,7 @@
                         dateObj: d,
                         isToday: d.getDate() == new Date().getDate(),
                         id: item._id,
-                        link: "/#/issue/" + item._id,
+                        link: "/index.html/#/issue/" + item._id,
                         summary: summary,
                         date: date + " " + time
                     });
@@ -130,7 +130,7 @@
                             dateObj: d,
                             isToday: d.getDate() == new Date().getDate(),
                             id: data.data[i]._id,
-                            link: "/#/bug/" + data.data[i]._id,
+                            link: "/index.html/#/bug/" + data.data[i]._id,
                             summary: summary,
                             date: date + " " + time
                         });

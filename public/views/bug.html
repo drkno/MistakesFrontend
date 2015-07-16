@@ -70,7 +70,7 @@
             <th>Associated Issues</th>
             <td>
                 <span data-ng-repeat="issue in issueLinks">
-                    <a data-ng-href="/#/issue/{{issue}}">{{issue}}</a>{{$last ? '' : ', '}}
+                    <a data-ng-href="/index.html/#/issue/{{issue}}">{{issue}}</a>{{$last ? '' : ', '}}
                 </span>
             </td>
         </tr>
@@ -113,4 +113,4 @@
         <p>{{data.message}}</p>
     </div>
 </div>
-<div data-ng-include data-src="'application/views/loading.html'"></div>
+<div data-ng-include data-src="'/views/loading.html'"></div>
