@@ -68,11 +68,13 @@
                         $scope.occurrenceNumbers[0][dateInd]++;
                     }
 
-                    $scope.images.push({
-                        url: item.screenshot,
-                        thumbUrl: item.screenshot,
-                        lightBox: false
-                    });
+                    for (var i = 0; i < item.screenshot.length; i++) {
+                        $scope.images.push({
+                            url: item.screenshot,
+                            thumbUrl: item.screenshot,
+                            lightBox: false
+                        });
+                    }
 
                     $scope.issueLinks.push(item._id);
                 }

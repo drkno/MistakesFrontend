@@ -26,11 +26,13 @@
                 $scope.issueDateTime = date + " " + time;
                 item.userDescription = decodeURIComponent(item.userDescription.replace(/\+/g, " "));
 
-                $scope.images.push({
-                    url: item.screenshot,
-                    thumbUrl: item.screenshot,
-                    lightBox: false
-                });
+                for (var i = 0; i < item.screenshot.length; i++) {
+                    $scope.images.push({
+                        url: item.screenshot[i],
+                        thumbUrl: item.screenshot[i],
+                        lightBox: false
+                    });
+            }
             };
 
             $scope.getData = function () {
