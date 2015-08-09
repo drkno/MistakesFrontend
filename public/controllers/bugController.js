@@ -69,11 +69,11 @@
                     }
 
                     for (var i = 0; i < item.screenshot.length; i++) {
-                    $scope.images.push({
-                        url: item.screenshot[i],
-                        thumbUrl: item.screenshot[i],
-                        lightBox: false
-                    });
+                        $scope.images.push({
+                            url: item.screenshot[i],
+                            thumbUrl: item.screenshot[i],
+                            lightBox: false
+                        });
                     }
 
                     $scope.issueLinks.push(item._id);
